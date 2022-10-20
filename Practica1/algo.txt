@@ -1,0 +1,81 @@
+Informe Algoritmos p1
+
+Participantes:
+	Yeray Lois Sánchez
+	Fernando Pazó González
+	Victor González Del Campo
+	-Grupo 2.2
+	
+Esta practica consiste en analizar los tiempos y cotas de 3 algoritmos para una sucesión de Fibonacci.
+Analizaremos los tiempos de ejecución para distintos valores de la sucesión con los diferentes
+algoritmos para valorar la complejidad y velocidad de estos con valores pequeños y grandes.
+
+Dicha prueba fue realizada en un fichero de tipo ".c", para comprobar el correcto funcionamiento de la 
+implementación de cada algoritmo, se adjunta una función ("void test") mediante la cual cotejamos y 
+comparamos los resultados obtenidos con los 3 algoritmos para diferentes posiciones de la sucesión.
+
+Los tiempos han sido medidos desde un portatil Lenovo idepad5 14ITL05 de 16 Gb de RAM y procesador
+11th Gen Intel® Core™ i7-1165G7 @ 2.80GHz × 8, con un SO Ubuntu 22.04.1 LTS de 64 bits.
+
+El tiempo fue medido en microsegundos.
+
+Parámetros:
+	n = posición de la sucesión Fibonacci
+	t = tiempo de ejecución en microsegundos
+	x = cota subestimada ("CotaSub")
+	y = cota ajustada ("Cota")
+	z = cota sobreestimada ("CotaSob")
+
+Fibonacci_1
+		n		T		Cota		CotaSub		CotaSob		<500
+                2            0.019            0.015702          0.007257       0.004750		*
+                4            0.065            0.044396          0.009483       0.004063		*
+                8            0.461            0.215060          0.009813       0.001801		*
+               16            8.406            1.829391          0.003809       0.000128		*
+               32        12410.000          587.767890          0.002548       0.000003
+
+Fibonacci_2
+		n		T		Cota		CotaSub		CotaSob		<500
+             1000            1.545            0.006151          0.001545       0.000224		*
+            10000           15.503            0.009782          0.001550       0.000168		*
+           100000          154.363            0.015436          0.001544       0.000134		*
+          1000000         1679.000            0.026610          0.001679       0.000122
+         10000000        15508.000            0.038954          0.001551       0.000096
+
+Fibonacci_3
+		n		T		Cota		CotaSub		CotaSob		<500
+             1000            0.034            0.012936          0.004922       0.001075		*
+            10000            0.043            0.014169          0.004669       0.000430		*
+           100000            0.060            0.017683          0.005212       0.000190		*
+          1000000            0.072            0.019371          0.005212       0.000072		*
+         10000000            0.073            0.018183          0.004529       0.000023		*
+
+*** El simbolo "*" indica que el tiempo de ejecución fue menor de 500 microsegundos, por tanto,
+considerando estas como mediciones anómalas, se realizaron 1000 iteraciones y el tiempo resultante 
+fue dividido entre 1000 según la fórmula: t = (t2-t1)/1000.
+
+Las cotas ajustadas tienden a:
+	-> Fibonacci_1 tiende a infinito.
+	-> Fibonacci_2 tiende a infinito pero aumenta mucho mas lento que la anterior.
+	-> Fibonacci_3 tiende a 0.
+	
+Las cotas fueron calculadas con las formulas:
+	
+	Fib1:
+		x = t / (pow(1.1, i));
+        	y = t / (pow(((1 + sqrt(5)) / 2), i));
+        	z = t / (pow(2, i));
+	Fib2:
+		x = t / (pow(i, 0.8));
+        	y = t /  i;
+        	z = t / (i * log(i));
+        Fib3:
+        	x = t / (sqrt(log(i)));
+        	y = t /  log(i);
+        	z = t / (pow(i, 0.5));	
+        	
+Una vez analizados los algoritmos llegamos a la conclusión de que el algoritmo 3 es el más eficiente
+puesto que tiene tiempos de ejecución muy bajos tanto para valores pequeños como grandes y a diferencia
+de los otros los tiempos apenas aumentan al aumentar la posición de la sucesión de Fibonacci.        	
+	
+	
